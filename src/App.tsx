@@ -1,6 +1,6 @@
 import { RouterProvider } from "react-router";
-import { router } from "./route/Navigation";
+import { Navigation } from "./route/Navigation";
 
 export const App = () => {
-  return <RouterProvider router={router} />;
+  return <RouterProvider router={Navigation} />;
 };

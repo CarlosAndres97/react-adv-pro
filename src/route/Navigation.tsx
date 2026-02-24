@@ -1,8 +1,10 @@
-import { createBrowserRouter, Link, NavLink, Outlet } from "react-router";
+import { createBrowserRouter, NavLink, Outlet } from "react-router";
 
 import reactLogo from "../assets/react.svg";
+import { LazyPage1, LazyPage2, LazyPage3 } from "../01-lazy-load/pages";
 
-export const router = createBrowserRouter([
+
+export const Navigation = createBrowserRouter([
   {
     path: "/",
     element: (
@@ -12,10 +14,10 @@ export const router = createBrowserRouter([
           <ul>
             <li>
               <NavLink
-                to={"/"}
+                to={"/lazy1"}
                 className={({ isActive }) => (isActive ? "nav-active" : "")}
               >
-                Home
+                Lazy1
               </NavLink>
             </li>
           </ul>
@@ -23,9 +25,9 @@ export const router = createBrowserRouter([
             <li>
               <NavLink
                 className={({ isActive }) => (isActive ? "nav-active" : "")}
-                to={"/about"}
+                to={"/lazy2"}
               >
-                About
+                Lazy2
               </NavLink>
             </li>
           </ul>
@@ -33,9 +35,9 @@ export const router = createBrowserRouter([
             <li>
               <NavLink
                 className={({ isActive }) => (isActive ? "nav-active" : "")}
-                to={"/users"}
+                to={"/lazy3"}
               >
-                Users
+                Lazy3
               </NavLink>
             </li>
           </ul>
@@ -45,16 +47,16 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        index: true,
-        element: <h1>Home</h1>,
+        path:'lazy1',
+        element: <LazyPage1 />,
       },
       {
-        path: "users",
-        element: <h1>Users</h1>,
+        path: "lazy2",
+        element: <LazyPage2 />,
       },
       {
-        path: "about",
-        element: <h1>About</h1>,
+        path: "lazy3",
+        element: <LazyPage3 />,
       },
     ],
   },
