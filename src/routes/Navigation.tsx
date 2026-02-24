@@ -1,8 +1,9 @@
-import { createBrowserRouter, NavLink, Outlet } from "react-router";
+import { createBrowserRouter, Navigate, NavLink, Outlet } from "react-router";
 
 import reactLogo from "../assets/react.svg";
-import { LazyPage1, LazyPage2, LazyPage3 } from "../01-lazy-load/pages";
 
+import { routes } from "./routes";
+import { Suspense } from "react";
 
 export const Navigation = createBrowserRouter([
   {
@@ -12,52 +13,32 @@ export const Navigation = createBrowserRouter([
         <nav>
           <img src={reactLogo} alt="" />
           <ul>
-            <li>
-              <NavLink
-                to={"/lazy1"}
-                className={({ isActive }) => (isActive ? "nav-active" : "")}
-              >
-                Lazy1
-              </NavLink>
-            </li>
-          </ul>
-          <ul>
-            <li>
-              <NavLink
-                className={({ isActive }) => (isActive ? "nav-active" : "")}
-                to={"/lazy2"}
-              >
-                Lazy2
-              </NavLink>
-            </li>
-          </ul>
-          <ul>
-            <li>
-              <NavLink
-                className={({ isActive }) => (isActive ? "nav-active" : "")}
-                to={"/lazy3"}
-              >
-                Lazy3
-              </NavLink>
-            </li>
+            {routes.map(({ path, name }) => (
+              <li key={path}>
+                <NavLink
+                  to={path}
+                  className={({ isActive }) => (isActive ? "nav-active" : "")}
+                >
+                  {name}
+                </NavLink>
+              </li>
+            ))}
           </ul>
         </nav>
-        <Outlet />
+        <Suspense fallback={<h1>Cargando...</h1>}>
+          <Outlet />
+        </Suspense>
       </div>
     ),
     children: [
-      {
-        path:'lazy1',
-        element: <LazyPage1 />,
-      },
-      {
-        path: "lazy2",
-        element: <LazyPage2 />,
-      },
-      {
-        path: "lazy3",
-        element: <LazyPage3 />,
-      },
+      ...routes.map(({ path, Component }) => ({
+        path,
+        element: <Component/>
+      })),
     ],
   },
+  {
+    path:'*',
+    element: <Navigate to='/' />
+  }
 ]);
