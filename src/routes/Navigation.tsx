@@ -31,9 +31,13 @@ export const Navigation = createBrowserRouter([
       </div>
     ),
     children: [
-      ...routes.map(({ path, Component }) => ({
+      ...routes.map(({ path, Component, children }) => ({
         path,
         element: <Component />,
+        children: children ? children.map(({ path: childPath, Component: ChildComponent }) => ({
+          path: childPath,
+          element: <ChildComponent />,
+        })) : undefined,
       })),
     ],
   },
