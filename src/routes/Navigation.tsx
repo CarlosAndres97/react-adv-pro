@@ -33,12 +33,12 @@ export const Navigation = createBrowserRouter([
     children: [
       ...routes.map(({ path, Component }) => ({
         path,
-        element: <Component/>
+        element: <Component />,
       })),
     ],
   },
   {
-    path:'*',
-    element: <Navigate to='/' />
-  }
+    path: "*",
+    element: <Navigate to="/" />,
+  },
 ]);
