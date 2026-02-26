@@ -1,4 +1,5 @@
-import { createBrowserRouter, Link, NavLink, Outlet } from "react-router";
+import { createBrowserRouter, NavLink, Outlet } from "react-router";
+import { ShoppingPage } from "../02-component-patterns/pages/ShoppingPage";
 
 import reactLogo from "../assets/react.svg";
 
@@ -15,7 +16,7 @@ export const router = createBrowserRouter([
                 to={"/"}
                 className={({ isActive }) => (isActive ? "nav-active" : "")}
               >
-                Home
+                Shopping
               </NavLink>
             </li>
           </ul>
@@ -46,7 +47,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <h1>Home</h1>,
+        element: <ShoppingPage />,
       },
       {
         path: "users",
